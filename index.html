@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سياسة الخصوصية — SEHATI | صحتي</title>
+<meta name="description" content="سياسة الخصوصية لتطبيق صحتي SEHATI — تطبيق أندرويد يعمل بالكامل دون اتصال، ولا يجمع أي بيانات على الإنترنت.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#006948">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1C30;
+  --ink-2:#3D4A42;
+  --ink-3:#6D7A72;
+  --emerald:#006948;
+  --emerald-deep:#004534;
+  --emerald-soft:#E3F4EC;
+  --emerald-line:#BCCAC0;
+  --teal:#006A61;
+  --alert:#BA1A1A;
+  --paper:#FBFCFA;
+  --paper-2:#F3F7F3;
+  --card:#FFFFFF;
+  --radius:14px;
+  --shadow-soft:0 1px 2px rgba(11,28,48,.05), 0 8px 24px -12px rgba(11,28,48,.16);
+  --font-display-ar:"Readex Pro", system-ui, sans-serif;
+  --font-display-fr:"Fraunces", Georgia, serif;
+  --font-body-ar:"IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-body-fr:"IBM Plex Sans", system-ui, sans-serif;
+}
+[data-lang="ar"]{
+  --font-display:var(--font-display-ar);
+  --font-body:var(--font-body-ar);
+}
+[data-lang="fr"]{
+  --font-display:var(--font-display-fr);
+  --font-body:var(--font-body-fr);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* clinical-paper grain */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+::selection{background:var(--emerald);color:#fff}
+
+/* ---------- language visibility ----------
+   The [data-lang="ar"] rule carries !important on purpose: component
+   classes like .pill also set `display`, and without the extra weight a
+   French pill would stay visible while the rest of the page switches. */
+.t-fr{display:none}
+[data-lang="fr"] .t-ar{display:none}
+[data-lang="fr"] .t-fr{display:inline}
+[data-lang="fr"] .t-fr.block{display:block}
+[data-lang="fr"] .t-fr.pill{display:inline-block}
+[data-lang="ar"] .t-fr{display:none !important}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(251,252,250,.86);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--emerald-line);
+}
+.topbar-in{
+  max-width:1180px; margin:0 auto;
+  padding:12px 20px;
+  display:flex; align-items:center; gap:16px;
+}
+.brand{display:flex; align-items:center; gap:11px; min-width:0}
+.seal{
+  width:40px; height:40px; flex:0 0 40px;
+  border-radius:12px;
+  background:linear-gradient(150deg,var(--emerald) 0%,var(--emerald-deep) 100%);
+  display:grid; place-items:center;
+  box-shadow:0 6px 16px -6px rgba(0,105,72,.55);
+}
+.seal svg{width:22px;height:22px;display:block}
+.brand-name{
+  font-family:var(--font-display);
+  font-weight:700; font-size:1.02rem; line-height:1.2;
+  letter-spacing:-.01em; white-space:nowrap;
+}
+.brand-sub{
+  font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; white-space:nowrap;
+}
+.spacer{flex:1 1 auto}
+.langswitch{
+  display:inline-flex; gap:2px; padding:3px;
+  background:var(--emerald-soft);
+  border:1px solid var(--emerald-line);
+  border-radius:999px;
+}
+.langswitch button{
+  font:inherit; font-size:.82rem; font-weight:600;
+  border:0; cursor:pointer;
+  padding:6px 15px; border-radius:999px;
+  background:transparent; color:var(--emerald-deep);
+  transition:background .2s ease,color .2s ease;
+}
+.langswitch button[aria-pressed="true"]{
+  background:var(--emerald); color:#fff;
+  box-shadow:0 2px 8px -2px rgba(0,105,72,.5);
+}
+.langswitch button:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 85% 0%, #0A7A53 0%, transparent 55%),
+    radial-gradient(90% 80% at 5% 10%, #0A6E4E 0%, transparent 60%),
+    linear-gradient(160deg,#005137 0%,#00301F 100%);
+  color:#EAF7F1;
+}
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(70% 70% at 50% 40%, #000 40%, transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 40%, #000 40%, transparent 100%);
+  pointer-events:none;
+}
+.hero-in{
+  position:relative; z-index:1;
+  max-width:1180px; margin:0 auto;
+  padding:64px 20px 56px;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+  font-weight:600; color:#9FE3C6;
+  border:1px solid rgba(159,227,198,.35);
+  padding:6px 14px; border-radius:999px;
+  margin-bottom:22px;
+}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#68DBA9;box-shadow:0 0 0 3px rgba(104,219,169,.22)}
+h1{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(2.1rem,5.4vw,3.5rem);
+  line-height:1.18;
+  letter-spacing:-.02em;
+  margin:0 0 18px;
+  max-width:16ch;
+}
+[dir="rtl"] h1{max-width:18ch}
+.hero p.lede{
+  font-size:1.08rem; line-height:1.8; color:#C9E7DA;
+  max-width:62ch; margin:0 0 30px;
+}
+.badges{display:flex; flex-wrap:wrap; gap:10px}
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.16);
+  color:#DFF4EA;
+  padding:8px 15px; border-radius:999px;
+  font-size:.86rem; font-weight:500;
+  backdrop-filter:blur(6px);
+}
+.badge svg{width:16px;height:16px;flex:0 0 16px;color:#68DBA9}
+
+.meta-strip{
+  position:relative; z-index:1;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.meta-in{
+  max-width:1180px; margin:0 auto; padding:18px 20px;
+  display:flex; flex-wrap:wrap; gap:10px 34px;
+  font-size:.86rem; color:#A9D6C3;
+}
+.meta-in b{color:#EAF7F1; font-weight:600}
+
+/* ---------- layout ---------- */
+.wrap{
+  position:relative; z-index:1;
+  max-width:1180px; margin:0 auto;
+  padding:56px 20px 96px;
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  gap:56px;
+  align-items:start;
+}
+.toc{
+  position:sticky; top:88px;
+  max-height:calc(100vh - 120px);
+  overflow-y:auto;
+  padding-inline-end:6px;
+}
+.toc-title{
+  font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; margin-bottom:14px;
+}
+.toc ol{list-style:none; margin:0; padding:0; counter-reset:toc}
+.toc li{margin:0}
+.toc a{
+  display:flex; gap:10px; align-items:baseline;
+  padding:8px 12px; border-radius:9px;
+  color:var(--ink-2); text-decoration:none;
+  font-size:.9rem; line-height:1.5;
+  border-inline-start:2px solid transparent;
+  transition:background .18s ease, color .18s ease, border-color .18s ease;
+}
+.toc a:hover{background:var(--emerald-soft); color:var(--emerald-deep)}
+.toc a.active{
+  background:var(--emerald-soft); color:var(--emerald-deep);
+  border-inline-start-color:var(--emerald); font-weight:600;
+}
+.toc a .num{
+  font-family:var(--font-display);
+  font-size:.74rem; color:var(--ink-3); min-width:1.6em;
+  font-variant-numeric:tabular-nums;
+}
+.toc a.active .num{color:var(--emerald)}
+
+.article{min-width:0; max-width:74ch}
+
+/* ---------- sections ---------- */
+section.blk{
+  scroll-margin-top:96px;
+  padding-bottom:44px;
+  margin-bottom:44px;
+  border-bottom:1px solid var(--emerald-line);
+}
+section.blk:last-of-type{border-bottom:0}
+.sec-head{display:flex; align-items:flex-start; gap:16px; margin-bottom:20px}
+.sec-num{
+  font-family:var(--font-display);
+  font-size:.8rem; font-weight:700;
+  color:var(--emerald);
+  background:var(--emerald-soft);
+  border:1px solid var(--emerald-line);
+  width:34px; height:34px; flex:0 0 34px;
+  display:grid; place-items:center;
+  border-radius:10px;
+  margin-top:8px;
+  font-variant-numeric:tabular-nums;
+}
+h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,3vw,1.8rem);
+  font-weight:700; line-height:1.3; letter-spacing:-.015em;
+  margin:0;
+}
+h3{
+  font-family:var(--font-display);
+  font-size:1.08rem; font-weight:600;
+  margin:30px 0 10px; color:var(--ink);
+}
+p{margin:0 0 16px}
+[dir="rtl"] p, [dir="rtl"] li{text-align:right}
+a{color:var(--emerald-deep); text-underline-offset:3px}
+a:hover{color:var(--emerald)}
+ul,ol{padding-inline-start:22px; margin:0 0 18px}
+li{margin-bottom:9px}
+strong{font-weight:600}
+.lead-strong{
+  font-size:1.04rem; line-height:1.85;
+  border-inline-start:3px solid var(--emerald);
+  padding-inline-start:18px; margin-bottom:26px;
+  color:var(--ink);
+}
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--card);
+  border:1px solid var(--emerald-line);
+  border-inline-start:4px solid var(--emerald);
+  border-radius:var(--radius);
+  padding:20px 22px;
+  margin:24px 0;
+  box-shadow:var(--shadow-soft);
+}
+.callout .c-title{
+  display:flex; align-items:center; gap:9px;
+  font-weight:700; font-size:.95rem; margin-bottom:8px; color:var(--emerald-deep);
+}
+.callout .c-title svg{width:18px;height:18px;flex:0 0 18px;color:var(--emerald)}
+.callout p:last-child{margin-bottom:0}
+.callout.warn{border-inline-start-color:var(--alert)}
+.callout.warn .c-title{color:var(--alert)}
+.callout.warn .c-title svg{color:var(--alert)}
+
+/* ---------- data table ---------- */
+.table-wrap{
+  overflow-x:auto; margin:22px 0;
+  border:1px solid var(--emerald-line);
+  border-radius:var(--radius);
+  background:var(--card);
+  box-shadow:var(--shadow-soft);
+}
+table{border-collapse:collapse; width:100%; min-width:520px}
+caption{
+  caption-side:top; text-align:start;
+  padding:16px 20px 0;
+  font-weight:600; font-size:.95rem; color:var(--ink);
+}
+thead th{
+  background:var(--emerald-soft);
+  text-align:start; font-weight:600; font-size:.85rem;
+  color:var(--emerald-deep);
+  padding:13px 20px;
+  border-bottom:1px solid var(--emerald-line);
+  white-space:nowrap;
+}
+tbody td{
+  padding:14px 20px;
+  border-bottom:1px solid #E8EEE9;
+  vertical-align:top; font-size:.93rem; line-height:1.7;
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FAFCFA}
+.pill{
+  display:inline-block;
+  font-size:.74rem; font-weight:600;
+  padding:3px 11px; border-radius:999px;
+  background:var(--emerald-soft); color:var(--emerald-deep);
+  border:1px solid var(--emerald-line);
+  white-space:nowrap;
+}
+.pill.off{background:#F3F5F4; color:var(--ink-3)}
+
+/* ---------- permissions cards ---------- */
+.perm-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px; margin:24px 0;
+}
+.perm{
+  background:var(--card);
+  border:1px solid var(--emerald-line);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow-soft);
+}
+.perm-code{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.76rem; color:var(--teal);
+  background:#EAF4F2; border:1px solid #CFE3DF;
+  padding:3px 9px; border-radius:6px;
+  display:inline-block; margin-bottom:11px;
+  word-break:break-all;
+}
+.perm h4{margin:0 0 6px; font-size:.97rem; font-weight:600; font-family:var(--font-display)}
+.perm p{margin:0; font-size:.88rem; line-height:1.7; color:var(--ink-2)}
+
+/* ---------- contact ---------- */
+.contact-card{
+  background:linear-gradient(155deg,#006948 0%,#00301F 100%);
+  color:#EAF7F1;
+  border-radius:18px;
+  padding:32px 30px;
+  margin-top:12px;
+  position:relative; overflow:hidden;
+}
+.contact-card::after{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(70% 70% at 80% 10%, #000 30%, transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 70% at 80% 10%, #000 30%, transparent 100%);
+  pointer-events:none;
+}
+.contact-card > *{position:relative; z-index:1}
+.contact-card h3{color:#fff; margin-top:0; font-size:1.25rem}
+.contact-card p{color:#C9E7DA}
+.mail{
+  display:inline-flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff; text-decoration:none;
+  padding:12px 20px; border-radius:999px;
+  font-weight:600; font-size:.98rem;
+  direction:ltr;
+  transition:background .2s ease, transform .2s ease;
+}
+.mail:hover{background:rgba(255,255,255,.2); color:#fff; transform:translateY(-2px)}
+.mail svg{width:18px;height:18px}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--emerald-line);
+  background:var(--paper-2);
+  padding:34px 20px;
+  text-align:center;
+}
+footer .sig{
+  font-family:var(--font-display);
+  font-weight:700; letter-spacing:.22em;
+  text-transform:uppercase; font-size:.78rem;
+  color:var(--emerald-deep);
+}
+footer p{color:var(--ink-3); font-size:.85rem; margin:10px 0 0}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding-top:36px}
+  .toc{
+    position:static; max-height:none;
+    background:var(--card); border:1px solid var(--emerald-line);
+    border-radius:var(--radius); padding:18px; margin-bottom:36px;
+    box-shadow:var(--shadow-soft);
+  }
+  .toc ol{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:2px}
+  .hero-in{padding:48px 20px 40px}
+  .article{max-width:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .brand-sub{display:none}
+  .topbar-in{padding:10px 16px; gap:10px}
+  .langswitch button{padding:6px 12px; font-size:.8rem}
+  .wrap{padding:30px 16px 72px}
+  .hero-in{padding:38px 16px 34px}
+  .contact-card{padding:26px 22px}
+}
+@media print{
+  .topbar,.toc,.mail:hover{display:none}
+  body{background:#fff; font-size:11pt}
+  body::before{display:none}
+  .hero{background:#fff !important; color:#000; border-bottom:2px solid #000}
+  .hero p.lede,.meta-in,.badge,.eyebrow{color:#333}
+  section.blk{page-break-inside:avoid; border-color:#ddd}
+  .contact-card{background:#fff !important; color:#000; border:1px solid #000}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">SEHATI <span style="opacity:.55">|</span> صحتي</div>
+        <div class="brand-sub t-ar block">Privacy Policy</div>
+        <div class="brand-sub t-fr block">Politique de confidentialité</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="langswitch" role="group" aria-label="Language / langue">
+      <button type="button" id="btn-ar" aria-pressed="true" data-set-lang="ar">العربية</button>
+      <button type="button" id="btn-fr" aria-pressed="false" data-set-lang="fr">Français</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <span class="eyebrow"><span class="dot"></span>
+      <span class="t-ar block">وثيقة قانونية · الإصدار 1.0</span>
+      <span class="t-fr block">Document légal · Version 1.0</span>
+    </span>
+
+    <h1>
+      <span class="t-ar block">سياسة الخصوصية<br>وتحماية البيانات الصحية</span>
+      <span class="t-fr block">Politique de confidentialité<br>et protection des données</span>
+    </h1>
+
+    <p class="lede">
+      <span class="t-ar block">يشرح هذا المستند بالتفصيل ما هي البيانات التي يجمعها تطبيق «صحتي SEHATI»، وكيف تُخزَّن على جهازك، ولماذا لا تغادر جهازك أبداً. التطبيق مُصمَّم من الأساس ليعمل دون أي خادم سحابي.</span>
+      <span class="t-fr block">Ce document explique en détail les données collectées par l'application « SEHATI », la manière dont elles sont stockées sur votre appareil, et pourquoi elles ne le quittent jamais. L'application a été conçue dès l'origine pour fonctionner sans aucun serveur cloud.</span>
+    </p>
+
+    <div class="badges">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="t-ar block">تخزين محلي 100%</span><span class="t-fr block">Stockage 100 % local</span></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <span class="t-ar block">بدون إعلانات</span><span class="t-fr block">Aucune publicité</span></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        <span class="t-ar block">بدون أدوات تحليل</span><span class="t-fr block">Aucune analytique</span></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+        <span class="t-ar block">بدون حساب</span><span class="t-fr block">Aucun compte</span></span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-5a8 8 0 0116 0v5"/><rect x="2" y="11" width="20" height="10" rx="2"/></svg>
+        <span class="t-ar block">نسخة احتياطية مشفّرة — استعادة بواسطتك وحدك</span><span class="t-fr block">Sauvegarde chiffrée — vous seul pouvez restaurer</span></span>
+    </div>
+  </div>
+
+  <div class="meta-strip">
+    <div class="meta-in">
+      <span><span class="t-ar block">آخر تحديث: <b>18 أكتوبر 2026</b></span><span class="t-fr block">Dernière mise à jour : <b>18 octobre 2026</b></span></span>
+      <span><span class="t-ar block">النوع: <b>تطبيق أندرويد — أداة تسجيل صحي محلي</b></span><span class="t-fr block">Type : <b>Application Android — dossier de santé local</b></span></span>
+      <span><span class="t-ar block">المعرّف: <b dir="ltr">com.sehati.health</b></span><span class="t-fr block">Identifiant : <b dir="ltr">com.sehati.health</b></span></span>
+      <span><span class="t-ar block">الجهة الناشرة: <b>SIMOXOR</b></span><span class="t-fr block">Éditeur : <b>SIMOXOR</b></span></span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- ================= TOC ================= -->
+  <nav class="toc" aria-label="Table des matières">
+    <div class="toc-title"><span class="t-ar block">محتويات الوثيقة</span><span class="t-fr block">Sommaire</span></div>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span><span class="t-ar block">نظرة عامة</span><span class="t-fr block">Vue d'ensemble</span></a></li>
+      <li><a href="#s2"><span class="num">02</span><span class="t-ar block">من نحن</span><span class="t-fr block">Qui sommes-nous</span></a></li>
+      <li><a href="#s3"><span class="num">03</span><span class="t-ar block">البيانات التي نجمعها</span><span class="t-fr block">Données collectées</span></a></li>
+      <li><a href="#s4"><span class="num">04</span><span class="t-ar block">كيف نستخدم بياناتك</span><span class="t-fr block">Utilisation des données</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span class="t-ar block">التخزين والأمان</span><span class="t-fr block">Stockage et sécurité</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span class="t-ar block">الأذونات التي نطلبها</span><span class="t-fr block">Autorisations demandées</span></a></li>
+      <li><a href="#s7"><span class="num">07</span><span class="t-ar block">المشاركة وأطراف ثالثة</span><span class="t-fr block">Partage et tiers</span></a></li>
+      <li><a href="#s8"><span class="num">08</span><span class="t-ar block">مدة الاحتفاظ والحذف</span><span class="t-fr block">Conservation et suppression</span></a></li>
+      <li><a href="#s9"><span class="num">09</span><span class="t-ar block">حقوقك</span><span class="t-fr block">Vos droits</span></a></li>
+      <li><a href="#s10"><span class="num">10</span><span class="t-ar block">خصوصية الأطفال</span><span class="t-fr block">Enfants</span></a></li>
+      <li><a href="#s11"><span class="num">11</span><span class="t-ar block">تنبيه طبي</span><span class="t-fr block">Avertissement médical</span></a></li>
+      <li><a href="#s12"><span class="num">12</span><span class="t-ar block">التعديلات والتواصل</span><span class="t-fr block">Modifications et contact</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ================= ARTICLE ================= -->
+  <article class="article">
+
+    <!-- 01 -->
+    <section class="blk" id="s1">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2><span class="t-ar block">نظرة عامة على السياسة</span><span class="t-fr block">Vue d'ensemble de la politique</span></h2>
+      </div>
+      <p class="lead-strong">
+        <span class="t-ar block">«صحتي SEHATI» تطبيق يعمل بالكامل على هاتفك. لا يملك خوادم، ولا يطلب إنشاء حساب، ولا يرسل أي جزء من بياناتك الصحية إلى أي جهة خارج جهازك.</span>
+        <span class="t-fr block">« SEHATI » est une application qui fonctionne entièrement sur votre téléphone. Elle ne dispose d'aucun serveur, ne demande la création d'aucun compte et n'envoie aucune donnée de santé à un tiers extérieur à votre appareil.</span>
+      </p>
+      <p>
+        <span class="t-ar block">تسري هذه السياسة على كل مستخدمين التطبيق على نظام أندرويد. عند استخدامك التطبيق فأنت تُدخل بيانات صحية تخص نفسك أو تعتمد على أشخاص تثق بهم (أفراد أسرتك أو مقدمو الرعاية). أنت، ولا غيرك، المتحكم الوحيد بهذه البيانات.</span>
+        <span class="t-fr block">Cette politique s'applique à tous les utilisateurs de l'application sur Android. En l'utilisant, vous saisissez des données de santé qui vous concernent, ou concernant des personnes dont vous avez la charge (membres de votre famille, aidants). Vous êtes, et vous seul, le responsable du traitement de ces données.</span>
+      </p>
+    </section>
+
+    <!-- 02 -->
+    <section class="blk" id="s2">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2><span class="t-ar block">من نحن</span><span class="t-fr block">Qui sommes-nous</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">تطبيق «صحتي SEHATI» هو تطبيق أندرويد للهواتف الذكية صُمم ليكون سجلاً طبياً شخصياً وعائلياً، ومُطوّر وناشره <strong>SIMOXOR</strong>.</span>
+        <span class="t-fr block">L'application « SEHATI » est une application Android conçue pour servir de dossier médical personnel et familial. Elle est développée et publiée par <strong>SIMOXOR</strong>.</span>
+      </p>
+      <p>
+        <span class="t-ar block">صُمّم التطبيق لكبار السن ومرضى الأمراض المزمنة وأفراد الأسرة، مع دعم كامل للغتين العربية والفرنسية.</span>
+        <span class="t-fr block">Elle s'adresse aux personnes âgées, aux patients atteints de maladies chroniques et aux membres de la famille, avec un support complet de l'arabe et du français.</span>
+      </p>
+    </section>
+
+    <!-- 03 -->
+    <section class="blk" id="s3">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2><span class="t-ar block">البيانات التي يجمعها التطبيق</span><span class="t-fr block">Les données que nous collectons</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">نستخدم مصطلح «الجمع» بمعناه الواسع ليشمل أي تسجيل happens داخل التطبيق. جميع هذه البيانات <strong>بيانات صحية حسّاسة</strong>، وتُخزَّن محلياً على جهازك فقط.</span>
+        <span class="t-fr block">Nous employons le terme « collecte » au sens large : tout enregistrement effectué dans l'application. L'ensemble de ces données constitue des <strong>données de santé sensibles</strong>, stockées exclusivement et localement sur votre appareil.</span>
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <caption><span class="t-ar block">جدول البيانات — ملخص شامل</span><span class="t-fr block">Tableau récapitulatif des données</span></caption>
+          <thead>
+            <tr>
+              <th><span class="t-ar block">فئة البيانات</span><span class="t-fr block">Catégorie</span></th>
+              <th><span class="t-ar block">أمثلة تفصيلية</span><span class="t-fr block">Exemples détaillés</span></th>
+              <th><span class="t-ar block">أين تُخزَّن</span><span class="t-fr block">Stockage</span></th>
+              <th><span class="t-ar block">هل تصل إلى Google Drive؟</span><span class="t-fr block">Atteint Google Drive ?</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="t-ar block"><strong>الملف الصحي</strong></span><span class="t-fr block"><strong>Profil de santé</strong></span></td>
+              <td><span class="t-ar block">الاسم الكامل، تاريخ الميلاد، العمر، فصيلة الدم، الطول، الوزن، الحساسية الدوائية، الأمراض المزمنة، ملاحظات سريرية.</span>
+                  <span class="t-fr block">Nom complet, date de naissance, âge, groupe sanguin, taille, poids, allergies médicamenteuses, maladies chroniques, notes cliniques.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات محلية</span><span class="pill t-fr block">Base locale</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>الأدوية والجرعات</strong></span><span class="t-fr block"><strong>Médicaments et doses</strong></span></td>
+              <td><span class="t-ar block">الاسم التجاري والعلمي، الشكل الصيدلاني، مقدار الجرعة ووحدتها، تعليمات الاستخدام، مواعيد الجرعات، أيام التكرار، تعليمات التخزين.</span>
+                  <span class="t-fr block">Nom commercial et scientifique, forme pharmaceutique, dose et unité, mode d'emploi, horaires, jours de répétition, conservation.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات محلية</span><span class="pill t-fr block">Base locale</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>سجل إجراءات الجرعات</strong></span><span class="t-fr block"><strong>Journal des doses</strong></span></td>
+              <td><span class="t-ar block">الوقت المجدول، الإجراء المتخذ (أخذ / تأجيل / تخطي)، سبب التخطي، عدد مرات التأجيل، ونِسب الالتزام الدوائي المحسوبة.</span>
+                  <span class="t-fr block">Heure prévue, action effectuée (prise / report / saut), motif du saut, nombre de reports, taux d'observance calculé.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات محلية</span><span class="pill t-fr block">Base locale</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>القياسات الحيوية</strong></span><span class="t-fr block"><strong>Constantes vitales</strong></span></td>
+              <td><span class="t-ar block">الضغط الانقباضي والانبساطي (mmHg)، معدل النبض (bpm)، الأعراض المصاحبة، ملاحظات القياس، وتصنيف القراءة وفق عتبات جمعية القلب.</span>
+                  <span class="t-fr block">Pression systolique et diastolique (mmHg), pouls (bpm), symptômes associés, notes, classification selon les seuils AHA.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات محلية</span><span class="pill t-fr block">Base locale</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>المواعيد الطبية</strong></span><span class="t-fr block"><strong>Rendez-vous médicaux</strong></span></td>
+              <td><span class="t-ar block">اسم الطبيب أو العيادة، التخصص، الموقع، سبب الزيارة، التاريخ والوقت، حالة الموعد، ملاحظات.</span>
+                  <span class="t-fr block">Nom du médecin ou de la clinique, spécialité, lieu, motif, date et heure, statut, notes.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات محلية</span><span class="pill t-fr block">Base locale</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>تقارير المختبر والصور</strong></span><span class="t-fr block"><strong>Rapports de laboratoire et photos</strong></span></td>
+              <td><span class="t-ar block">عنوان التقرير، اسم المختبر، تاريخ التحليل، صورة ورقة التحليل، قيم المؤشرات المُدخلة حرفياً، وحالة التحقق (قبل المراجعة / تم التحقق).</span>
+                  <span class="t-fr block">Titre du rapport, laboratoire, date d'analyse, photo de la feuille de résultats, valeurs saisies verbatim, statut de vérification.</span></td>
+              <td><span class="pill t-ar block">قاعدة بيانات + مساحة خاصة</span><span class="pill t-fr block">Base + espace privé</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+            <tr>
+              <td><span class="t-ar block"><strong>إعدادات التطبيق</strong></span><span class="t-fr block"><strong>Paramètres de l'app</strong></span></td>
+              <td><span class="t-ar block">لغة الواجهة (عربي/فرنسي) وال patient's الملف النشط. لا يُجمع أي معرّف جهاز أو رقم هاتف أو عنوان IP.</span>
+                  <span class="t-fr block">Langue de l'interface (arabe/français) et profil actif. Aucun identifiant d'appareil, numéro de téléphone ou adresse IP n'est collecté.</span></td>
+              <td><span class="pill t-ar block">تفضيلات النظام</span><span class="pill t-fr block">Préférences système</span></td>
+              <td><span class="pill t-ar block">نعم — مشفّرة فقط</span><span class="pill t-fr block">Oui — chiffré uniquement</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="c-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <span class="t-ar block">ما لا نجمعه إطلاقاً</span><span class="t-fr block">Ce que nous ne collectons jamais</span>
+        </div>
+        <p>
+          <span class="t-ar block">لا يطلب التطبيق أي بيانات دخول ولا كلمة مرور ولا بريداً إلكترونياً ولا رقم هاتف ولا موقعاً جغرافياً. لا توجد حسابات مستخدمين، ولا إعلانات، ولا أدوات تحليلات، ولا تقارير أخطاء (Crash Reporting) ترسل أي محتوى.</span>
+          <span class="t-fr block">L'application ne demande ni identifiant, ni mot de passe, ni adresse e-mail, ni numéro de téléphone, ni géolocalisation. Il n'existe aucun compte utilisateur, aucune publicité, aucun outil d'analytique et aucun rapport d'erreur transmettant du contenu.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="blk" id="s4">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2><span class="t-ar block">كيف نستخدم بياناتك</span><span class="t-fr block">Comment nous utilisons vos données</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">لا نستخدم بياناتك لأي غرض تسويقي أو إعلاني أو تحليلي. الاستخدام الوحيد لبياناتك هو تشغيل الخصائص التي طلبتها أنت:</span>
+        <span class="t-fr block">Nous n'utilisons vos données à aucune fin marketing, publicitaire ou analytique. Elles servent uniquement à faire fonctionner les fonctionnalités que vous avez choisies :</span>
+      </p>
+      <ul>
+        <li><span class="t-ar block"><strong>عرض سجلاتك الصحية:</strong> ملفات المرضى، الأدوية، الجرعات، القياسات، التحاليل، والمواعيد، مع عزل كامل بين كل ملف وآخر.</span>
+            <span class="t-fr block"><strong>Afficher vos dossiers :</strong> profils, médicaments, doses, constantes, analyses et rendez-vous, avec une isolation stricte entre chaque profil.</span></li>
+        <li><span class="t-ar block"><strong>إرسال تذكيرات الجرعات:</strong> تنبيهات محلية على جهازك في الأوقات التي حدّدتها أنت.</span>
+            <span class="t-fr block"><strong>Envoyer les rappels de dose :</strong> notifications locales sur votre appareil aux horaires que vous avez définis.</span></li>
+        <li><span class="t-ar block"><strong>حساب تقارير المتابعة:</strong> نِسب الالتزام الدوائي، الرسوم البيانية للقياسات، وكل ذلك داخل جهازك فقط.</span>
+            <span class="t-fr block"><strong>Établir des rapports de suivi :</strong> taux d'observance, courbes des constantes — calculés uniquement sur votre appareil.</span></li>
+        <li><span class="t-ar block"><strong>قراءة صور التحاليل على الجهاز:</strong> القراءة الضوئية تتم محلياً بالكامل، وتبقى المسودة «قبل المراجعة» حتى تؤكدها بنفسك.</span>
+            <span class="t-fr block"><strong>Lire les photos de analyses sur l'appareil :</strong> la reconnaissance optique s'effectue intégralement sur l'appareil, et le brouillon reste « pré-vérification » jusqu'à votre confirmation personnelle.</span></li>
+      </ul>
+    </section>
+
+    <!-- 05 -->
+    <section class="blk" id="s5">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2><span class="t-ar block">أين تُخزَّن بياناتك وكيف تُحمى</span><span class="t-fr block">Où vos données sont stockées et protégées</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">تُحفظ جميع بياناتك في <strong>مساحة التطبيق الخاصة</strong> (Private App Sandbox) داخل نظام أندرويد، وهي منطقة معزولة لا تصل إليها أي تطبيق آخر على جهازك دون إذنك.</span>
+        <span class="t-fr block">Toutes vos données sont enregistrées dans l'<strong>espace privé de l'application</strong> (Private App Sandbox) d'Android, une zone isolée inaccessible aux autres applications de votre appareil sans votre autorisation.</span>
+      </p>
+      <ul>
+        <li><span class="t-ar block"><strong>قاعدة بيانات محلية مشفّرة:</strong> تُخزَّن السجلات في قاعدة بيانات داخلية على الجهاز بتشفير AES-256 كامل (SQLCipher)، لا مجرد حماية صندوق أندرويد. جميع الجداول مفاتيح خارجية مرتبطة بالمريض، فحذف ملف يحذف كل سجلاته تلقائياً.</span>
+            <span class="t-fr block"><strong>Base de données locale chiffrée :</strong> les enregistrements résident dans une base interne à l'appareil, protégée par un chiffrement AES-256 complet (SQLCipher) — pas seulement par le bac à sable d'Android. Toutes les tables sont liées au patient par clés étrangères : supprimer un profil supprime automatiquement toutes ses données.</span></li>
+        <li><span class="t-ar block"><strong>صور التحاليل:</strong> تُحفظ نسخة الصورة داخل مساحة التطبيق الخاصة فقط، ويُمنح تطبيق الكاميرا إذناً مؤقتاً لمرة واحدة لالتقاط الصورة، ثم يُلغى تلقائياً.</span>
+            <span class="t-fr block"><strong>Photos de laboratoire :</strong> la copie de l'image est enregistrée uniquement dans l'espace privé de l'application ; l'appareil photo ne reçoit qu'une autorisation temporaire à usage unique, révoquée automatiquement.</span></li>
+        <li><span class="t-ar block"><strong>التعرف الضوئي داخل الجهاز:</strong> نموذج القراءة الضوئية مُضمَّن داخل التطبيق (لا يُنزَّل من الإنترنت)، ويعمل بالكامل على معالج الجهاز.</span>
+            <span class="t-fr block"><strong>Reconnaissance optique sur l'appareil :</strong> le modèle de lecture est intégré à l'application (il n'est jamais téléchargé) et fonctionne intégralement sur le processeur de l'appareil.</span></li>
+        <li><span class="t-ar block"><strong>بلا اتصال شبكي:</strong> التطبيق لا يطلب إذن الإنترنت أصلاً، ويُلغي صراحةً أي إذن شبكي تحاول المكتبات المضمَّنة إضافتها. لا يمكن للتطبيق إرسال بياناتك حتى لو حاول ذلك برمجياً. النسخة الاحتياطية المشفّرة هي الاستثناء الوحيد، وقد فُوّضت صراحةً إلى نظام أندرويد نفسه، وما يصل إليها نص مشفّر بالكامل.</span>
+            <span class="t-fr block"><strong>Aucun accès réseau :</strong> l'application ne demande même pas la permission INTERNET et supprime explicitement toute permission réseau que ses bibliothèques tenteraient d'ajouter. Elle ne peut transmettre aucune donnée, même si elle essayait de le faire par programmation. Seule la sauvegarde chiffrée fait exception : elle est confiée au système d'exploitation lui-même, et uniquement sous forme de texte chiffré.</span></li>
+      </ul>
+
+<div class="callout">
+        <div class="c-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M18 6L6 18M6 6l12 12"/></svg>
+          <span class="t-ar block">نسخة احتياطية مشفّرة في Google Drive</span><span class="t-fr block">Sauvegarde chiffrée sur Google Drive</span>
+        </div>
+        <p>
+          <span class="t-ar block">حتى لا تضيع بياناتك الطبية عند فقدان الهاتف، يُرسل نظام أندرويد نسخة احتياطية إلى <strong>Google Drive</strong> الخاص بحسابك. وما يصل إلى هناك <strong>نص مشفّر بالكامل</strong>: قاعدة بيانات AES-256، وصور التحاليل مشفّرة بنفس المفتاح. لا يستطيع أحد — ولا حتى Google — قراءة محتواها.</span>
+          <span class="t-fr block">Afin que vos données médicales ne soient pas perdues en cas de perte du téléphone, Android transmet une sauvegarde à votre <strong>Google Drive</strong>. Ce qui y arrive est <strong>entièrement chiffré</strong> : base de données en AES-256, photos d'analyses chiffrées avec la même clé. Personne — Google compris — ne peut en lire le contenu.</span>
+        </p>
+        <p>
+          <span class="t-ar block"><strong>وأنت وحدك القادر على الاستيراد.</strong> أنت تختار <strong>كلمة مرور استعادة</strong> من داخل التطبيق، وتُشتق منها مفتاح فك تشفير النسخة المحفوظة. لا نحفظ كلمة المرور هذه ولا نرسلها ولا نطّلع عليها. من دونها، النسخة المحفوظة غير قابلة للاستخدام لأي شخص — بما في ذلك فريقنا.</span>
+          <span class="t-fr block"><strong>Vous seul pouvez l'importer.</strong> Vous choisissez vous-même une <strong>phrase secrète de restauration</strong> dans l'application, et la clé de déchiffrement de la sauvegarde en est dérivée. Nous ne conservons pas cette phrase, ne la transmettons pas et n'y avons pas accès. Sans elle, la sauvegarde est inutilisable par quiconque — y compris par notre équipe.</span>
+        </p>
+        <p>
+          <span class="t-ar block">لهذا نطلب منك أن تضع كلمة المرور في مكان آمن: <strong>فقدانها يعني فقدان النسخة نهائياً</strong>. ومن ثم فإن سجلاتك المحفوظة على Google Drive تبقى غير قابلة للقراءة دون موافقتك، مع توفّرها عندما تحتاجها فعلاً.</span>
+          <span class="t-fr block">C'est pourquoi nous vous demandons de la conserver en lieu sûr : <strong>la perdre revient à perdre définitivement la sauvegarde</strong>. Vos données conservées sur Google Drive restent ainsi illisibles sans votre accord, tout en restant disponibles quand vous en avez réellement besoin.</span>
+        </p>
+        <p>
+          <span class="t-ar block">يمكنك ضبط كلمة المرور أو تغييرها أو إلغاؤها في أي وقت من: <em>الرئيسية ← بطاقة الخصوصية ← النسخ الاحتياطي وكلمة مرور الاستعادة</em>. وتعطيل خدمة النسخ الاحتياطي في إعدادات نظام أندرويد يوقف هذه الحماية نهائياً.</span>
+          <span class="t-fr block">Vous pouvez définir, changer ou supprimer votre phrase à tout moment depuis : <em>Accueil ← carte de confidentialité ← Sauvegarde et phrase de restauration</em>. Désactiver le service de sauvegarde dans les réglages Android annule définitivement cette protection.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="blk" id="s6">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2><span class="t-ar block">الأذونات التي يطلبها التطبيق</span><span class="t-fr block">Les autorisations demandées</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">يطلب التطبيق أذونات محدودة ومحددة الغرض، جميعها تتعلق بتشغيل التذكيرات على جهازك:</span>
+        <span class="t-fr block">L'application demande un nombre limité d'autorisations, toutes liées au fonctionnement des rappels sur votre appareil :</span>
+      </p>
+      <div class="perm-grid">
+        <div class="perm">
+          <span class="perm-code">POST_NOTIFICATIONS</span>
+          <h4><span class="t-ar block">إشعارات تذكير الجرعات</span><span class="t-fr block">Notifications de rappel de dose</span></h4>
+          <p><span class="t-ar block">لعرض تذكير الجرعة في وقته. دون هذا الإذن لن تظهر التنبيهات.</span><span class="t-fr block">Pour afficher le rappel de dose à l'heure prévue. Sans elle, aucun rappel n'apparaît.</span></p>
+        </div>
+        <div class="perm">
+          <span class="perm-code">SCHEDULE_EXACT_ALARM</span>
+          <h4><span class="t-ar block">التنبيهات الدقيقة</span><span class="t-fr block">Alarmes exactes</span></h4>
+          <p><span class="t-ar block">حتى يصل التنبيه في الدقيقة المحددة تماماً لا قبلها بكثير. يطلب التطبيق إذنك صراحةً ولا يفترضه.</span><span class="t-fr block">Pour que le rappel arrive à l'heure exacte. L'application demande votre accord explicitement, elle ne le suppose jamais.</span></p>
+        </div>
+        <div class="perm">
+          <span class="perm-code">WAKE_LOCK</span>
+          <h4><span class="t-ar block">العمل أثناء وضع التوفير</span><span class="t-fr block">Fonctionnement en économie d'énergie</span></h4>
+          <p><span class="t-ar block">حتى لا تتأخر تنبيهات الجرعات أثناء وضع Doze في وميض الهاتف ليلاً.</span><span class="t-fr block">Pour éviter le retard des rappels pendant le mode Doze, lorsque l'écran est éteint.</span></p>
+        </div>
+        <div class="perm">
+          <span class="perm-code">RECEIVE_BOOT_COMPLETED</span>
+          <h4><span class="t-ar block">إعادة البناء بعد التشغيل</span><span class="t-fr block">Reconstruction après redémarrage</span></h4>
+          <p><span class="t-ar block">لإعادة جدولة كل تنبيهات الجرعات من قاعدة بياناتك المحلية بعد إعادة تشغيل الهاتف.</span><span class="t-fr block">Pour replanifier tous les rappels depuis votre base locale après le redémarrage du téléphone.</span></p>
+        </div>
+      </div>
+      <p>
+        <span class="t-ar block"><strong>ما لا يُطلب:</strong> التطبيق لا يطلب إذن الكاميرا ولا الوصول إلى معرض الصور ولا الموقع الجغرافي، فصور التحاليل تُلتقط عبر تطبيق الكاميرا القياسي مباشرةً أو عبر منتقي الصور، وتُحفظ نسخة منها في مساحة التطبيق الخاصة.</span>
+        <span class="t-fr block"><strong>Ce qui n'est jamais demandé :</strong> ni permission d'appareil photo, ni accès à la galerie, ni localisation. Les photos de laboratoire sont prises via l'appareil photo du système ou le sélecteur de fichiers, puis copiées dans l'espace privé de l'application.</span>
+      </p>
+    </section>
+
+    <!-- 07 -->
+    <section class="blk" id="s7">
+      <div class="sec-head">
+        <span class="sec-num">07</span>
+        <h2><span class="t-ar block">المشاركة ومزودو الطرف الثالث</span><span class="t-fr block">Partage et fournisseurs tiers</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block"><strong>نحن لا نبيع بياناتك ولا نؤجّرها ولا نشاركها مع أي جهة.</strong> لا يوجد في التطبيق أي شبكة إعلانية، ولا أدوات تتبّع، ولا خدمة تحليلات، ولا خوادم خلفية. لا يمكن لأي جهة استقبال بياناتك من التطبيق لأنها ببساطة لا تُرسَل.</span>
+        <span class="t-fr block"><strong>Nous ne vendons pas vos données, ne les louons pas et ne les partageons avec personne.</strong> L'application ne contient aucun réseau publicitaire, aucun traceur, aucun outil d'analytique et aucun serveur distant. Aucune donnée ne peut être transmise, tout simplement parce qu'aucune transmission n'existe.</span>
+      </p>
+      <p>
+        <span class="t-ar block">المكوّن الوحيد من جهة خارجية هو مكتبة قارئ النصوص من Google (ML Kit)، وهي مدمجة محلياً وتعمل دون اتصال ولا ترسل أي صورة أو نص إلى Google. وهي لا تُستخدم إلا لاستخراج الكلمات المطبوعة من صور التحاليل داخل جهازك.</span>
+        <span class="t-fr block">Le seul composant tiers est la bibliothèque de reconnaissance de texte de Google (ML Kit), intégrée localement et fonctionnant hors ligne : aucune image ni aucun texte n'est transmis à Google. Elle sert uniquement à extraire les mots imprimés de vos photos d'analyses, sur votre appareil.</span>
+      </p>
+      <p>
+<span class="t-ar block">وعليه، لا يجري أي <strong>نقل دولي للبيانات</strong> من طرفنا: لا نملك خوادم ولا نستقبل بيانات ولا نرسلها. والاستثناء الوحيد هو النسخة المشفّرة التي يسلّمها نظام أندرويد إلى Google Drive ضمن خدمة النسخ الاحتياطي التي فعّلها المستخدم على حسابه. وهي بيانات مشفّرة لا يستطيع أحد قراءتها، حتى مزوّد الخدمة نفسه. وإن كان التطبيق مثبتاً على جهاز مشترك، فيجب أن تعرف أن كل من يفتح التطبيق على هذا الجهاز يمكنه الوصول إلى السجلات الموجودة فيه.</span>
+        <span class="t-fr block">En conséquence, aucun <strong>transfert international de données</strong> n'est effectué de notre côté : nous n'avons aucun serveur, nous ne recevons rien et n'envoyons rien. Seule exception : la sauvegarde chiffrée que le système Android confie à Google Drive via le service de sauvegarde activé par l'utilisateur sur son compte. Il s'agit de données chiffrées, illisibles par quiconque, le prestataire lui-même compris. Si l'application est installée sur un appareil partagé, gardez à l'esprit que toute personne ouvrant l'application sur cet appareil peut accéder aux enregistrements qu'il contient.</span>
+      </p>
+    </section>
+
+    <!-- 08 -->
+    <section class="blk" id="s8">
+      <div class="sec-head">
+        <span class="sec-num">08</span>
+        <h2><span class="t-ar block">مدة الاحتفاظ بالبيانات وحذفها</span><span class="t-fr block">Durée de conservation et suppression</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">تُحفظ بياناتك ما دام التطبيق مثبتاً على جهازك، ولا توجد مدة انتهاء تلقائية تحذف سجلاتك الصحية.</span>
+        <span class="t-fr block">Vos données sont conservées tant que l'application reste installée sur votre appareil. Aucune expiration automatique ne supprime vos dossiers de santé.</span>
+      </p>
+      <p><span class="t-ar block">يمكنك حذف بياناتك بالكامل بإحدى الطرق التالية:</span><span class="t-fr block">Vous pouvez supprimer l'intégralité de vos données de l'une des façons suivantes :</span></p>
+      <ul>
+        <li><span class="t-ar block"><strong>حذف سجل بعينه:</strong> حذف ملف مريض يحذف تلقائياً أدويته وسجلات جرعاته ومواعيده وقياساته وتحاليله وصوره المرتبطة به.</span>
+            <span class="t-fr block"><strong>Suppression d'un profil :</strong> supprimer un profil supprime automatiquement ses médicaments, doses, rendez-vous, constantes, analyses et photos associées.</span></li>
+        <li><span class="t-ar block"><strong>حذف سجل بعينه من داخل الشاشة:</strong> يمكنك أيضاً حذف دواء أو قراءة أو موعد أو تقرير تحليل من شاشته مباشرةً.</span>
+            <span class="t-fr block"><strong>Suppression d'un élément :</strong> vous pouvez supprimer un médicament, une mesure, un rendez-vous ou un rapport directement depuis son écran.</span></li>
+<li><span class="t-ar block"><strong>إلغاء تثبيت التطبيق:</strong> إزالة التطبيق من جهازك تحذف قاعدة البيانات المحلية وصور التحاليل نهائياً. أما النسخة المشفّرة الموجودة في Google Drive، إن وُجدت، فتبقى هناك حتى تحذفها أنت من إعدادات النسخ الاحتياطي في نظامك.</span>
+            <span class="t-fr block"><strong>Désinstallation de l'application :</strong> retirer l'application de votre appareil supprime définitivement la base locale et les photos d'analyses. La sauvegarde chiffrée éventuellement présente dans Google Drive, elle, y demeure jusqu'à ce que vous la supprimiez vous-même des réglages de sauvegarde de votre système.</span></li>
+        <li><span class="t-ar block"><strong>مسح بيانات النظام:</strong> أي عملية «مسح البيانات» أو «مسح ذاكرة التخزين المؤقت» من إعدادات أندرويد تُزيل بيانات التطبيق المحلية.</span>
+            <span class="t-fr block"><strong>Effacement système :</strong> toute action « effacer les données » ou « vider le cache » dans les paramètres Android supprime les données locales de l'application.</span></li>
+      </ul>
+      <div class="callout">
+        <div class="c-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <span class="t-ar block">الحذف من التطبيق لا يحذف النسخة المحفوظة</span><span class="t-fr block">Supprimer dans l'application ne supprime pas la sauvegarde</span>
+        </div>
+        <p>
+          <span class="t-ar block">لأننا لا نملك أي وصول إلى حسابك، لا يمكننا حذف النسخة المشفّرة نيابةً عنك. فإذا أردت إبقاء سجلاتك خارج أي تخزين خارجي، فعّل خيار إلغاء تثبيت التطبيق «مسح جميع البيانات» في إعدادات أندرويد، أو احذف النسخة من إعدادات النسخ الاحتياطي.</span>
+          <span class="t-fr block">N'ayant aucun accès à votre compte, nous ne pouvons pas supprimer la sauvegarde chiffrée à votre place. Si vous souhaitez que vos enregistrements ne subsistent dans aucun stockage externe, activez l'option « effacer toutes les données » à la désinstallation dans les réglages Android, ou supprimez la sauvegarde depuis les réglages de sauvegarde.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="blk" id="s9">
+      <div class="sec-head">
+        <span class="sec-num">09</span>
+        <h2><span class="t-ar block">حقوقك في بياناتك</span><span class="t-fr block">Vos droits sur vos données</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">بفضل التصميم المحلي للتطبيق، تملك تحكماً كاملاً ومباشراً في بياناتك دون الحاجة إلى مراسلة أي جهة:</span>
+        <span class="t-fr block">Grâce à l'architecture locale de l'application, vous disposez d'un contrôle complet et immédiat sur vos données, sans devoir correspondance avec un tiers :</span>
+      </p>
+      <ul>
+        <li><span class="t-ar block"><strong>حق الاطلاع:</strong> جميع بياناتك معروضة داخل التطبيق ويمكنك مراجعتها في أي وقت.</span>
+            <span class="t-fr block"><strong>Droit d'accès :</strong> toutes vos données sont affichées dans l'application et consultables à tout moment.</span></li>
+        <li><span class="t-ar block"><strong>حق التصحيح:</strong> يمكنك تعديل أي اسم أو جرعة أو قياس أو موعد بنقرة واحدة.</span>
+            <span class="t-fr block"><strong>Droit de rectification :</strong> vous pouvez modifier en un geste tout nom, dose, mesure ou rendez-vous.</span></li>
+        <li><span class="t-ar block"><strong>حق الحذف:</strong> يمكنك حذف ملف المريض أو أي سجل أو التطبيق بأكمله.</span>
+            <span class="t-fr block"><strong>Droit à l'effacement :</strong> effacer un profil, un enregistrement, ou l'application entière.</span></li>
+        <li><span class="t-ar block"><strong>حق النقل:</strong> يمكنك عرض بياناتك على شاشتك أو طباعتها أو نسخها يدوياً في أي وقت.</span>
+            <span class="t-fr block"><strong>Droit à la portabilité :</strong> vous pouvez consulter, imprimer ou recopier vos données à tout moment.</span></li>
+      </ul>
+      <p>
+        <span class="t-ar block">ولأي استفسار إضافي تتعلق بخصوص بياناتك، يمكنك مراسلتنا على العنوان المذكور في القسم الأخير من هذه الوثيقة.</span>
+        <span class="t-fr block">Pour toute question supplémentaire relative à vos données, vous pouvez nous écrire à l'adresse indiquée à la dernière section de ce document.</span>
+      </p>
+    </section>
+
+    <!-- 10 -->
+    <section class="blk" id="s10">
+      <div class="sec-head">
+        <span class="sec-num">10</span>
+        <h2><span class="t-ar block">خصوصية الأطفال</span><span class="t-fr block">Protection des enfants</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">التطبيق مُوجَّه للمستخدمين البالغين، ولا نجمع بيانات أي طفل بشكل مستقل. إذا أدخلت بيانات صحية تخص طفلاً — على سبيل المثال ملف ابنك — فأنت أو وليّ الأمر هو المسؤول عن ذلك، ومسؤول عنymmȘاء التأكد من موافقته.</span>
+        <span class="t-fr block">L'application s'adresse à des utilisateurs adultes et ne collecte aucune donnée enfant de manière autonome. Si vous saisissez des données de santé concernant un enfant — le profil de votre fils, par exemple — c'est vous, en tant que parent ou tuteur, qui en êtes responsable et qui devez vous assurer de son accord.</span>
+      </p>
+    </section>
+
+    <!-- 11 -->
+    <section class="blk" id="s11">
+      <div class="sec-head">
+        <span class="sec-num">11</span>
+        <h2><span class="t-ar block">تنبيه طبي مهم</span><span class="t-fr block">Avertissement médical important</span></h2>
+      </div>
+      <div class="callout warn">
+        <div class="c-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+          <span class="t-ar block">هذا التطبيق ليس جهازاً طبياً</span><span class="t-fr block">Cette application n'est pas un dispositif médical</span>
+        </div>
+        <p>
+          <span class="t-ar block">«SEHATI» أداة لتنظيم السجلات ومتابعة الجرعات فقط. لا يترجم، ولا يحسب الجرعات، ولا يشخّص الأمراض، ولا يفسّر نتائج التحاليل، ولا يقدّم نصيحة طبية. تصنيفات ضغط الدم وعتبات dibujos البيانية إرشادية للاطلاع فقط ولا تُغني عن استشارة الطبيب.</span>
+          <span class="t-fr block">« SEHATI » est un outil d'organisation de dossiers et de suivi des doses. Elle ne traduit rien, ne calcule aucune posologie, ne pose aucun diagnostic, n'interprète aucun résultat d'analyse et ne fournit aucun avis médical. Les catégories de tension artérielle et les seuils affichés sont purement informatifs et ne remplacent jamais une consultation.</span>
+        </p>
+        <p>
+          <span class="t-ar block">استشر دائماً الطبيب أو الصيدلي قبل بدء أي دواء أو تغيير جرعة أو إيقافه. في حالات الطوارئ، اتصل فوراً بالطوارئ أو بالجهات الصحية المختصة.</span>
+          <span class="t-fr block">Consultez toujours votre médecin ou votre pharmacien avant de commencer, modifier ou arrêter un traitement. En cas d'urgence, contactez immédiatement les secours ou les services de santé compétents.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="blk" id="s12">
+      <div class="sec-head">
+        <span class="sec-num">12</span>
+        <h2><span class="t-ar block">تعديلات السياسة والتواصل معنا</span><span class="t-fr block">Modifications et contact</span></h2>
+      </div>
+      <p>
+        <span class="t-ar block">قد نحدّث هذه السياسة مع evolves التطبيق. سيظهر تاريخ آخر تحديث في أعلى هذه الصفحة دائماً، ويosmcluster استمرار استخدامك للتطبيق بعد التحديث يعني موافقتك على النسخة الجديدة.</span>
+        <span class="t-fr block">Cette politique peut être mise à jour au fil de l'évolution de l'application. La date de dernière mise à jour figure toujours en haut de ce document ; le fait de continuer à utiliser l'application après une mise à jour vaut acceptation de la nouvelle version.</span>
+      </p>
+
+      <div class="contact-card">
+        <h3><span class="t-ar block">هل لديك سؤال حول بياناتك؟</span><span class="t-fr block">Une question sur vos données ?</span></h3>
+        <p><span class="t-ar block">نحن نقرأ كل رسالة. تواصل معنا لأي استفسار يتعلق بالخصوصية أو ببياناتك الشخصية.</span>
+               <span class="t-fr block">Nous lisons chaque message. Contactez-nous pour toute question relative à la confidentialité ou à vos données personnelles.</span></p>
+        <a class="mail" href="mailto:simoxor2000@gmail.com?subject=SEHati%20Privacy%20Policy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          simoxor2000@gmail.com
+        </a>
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<footer>
+  <div class="sig">Powered by Simoxor</div>
+  <p>© 2026 Simoxor — <span class="t-ar block">سياسة الخصوصية لتطبيق صحتي SEHATI</span><span class="t-fr block">Politique de confidentialité de l'application SEHATI</span></p>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  function applyLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang);
+    root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.title = (lang === 'ar')
+      ? 'سياسة الخصوصية — SEHATI | صحتي'
+      : 'Politique de confidentialité — SEHATI';
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    try { localStorage.setItem('sehati-privacy-lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyLang(btn.getAttribute('data-set-lang'));
+    });
+  });
+
+  var stored = null;
+  try { stored = localStorage.getItem('sehati-privacy-lang'); } catch (e) {}
+  applyLang(stored || 'ar');
+
+  // Scroll-spy for the table of contents.
+  // NOTE: section.offsetTop is measured against the nearest POSITIONED
+  // ancestor, not the document, so comparing it to window.scrollY silently
+  // pins the highlight to link #1 forever. Absolute document coordinates via
+  // getBoundingClientRect() are what we actually need here.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var targets = links
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  function docTop(el) {
+    return el.getBoundingClientRect().top + window.scrollY;
+  }
+
+  function sync() {
+    var line = window.scrollY + 160;
+    var best = 0;
+    for (var i = 0; i < targets.length; i++) {
+      if (docTop(targets[i]) <= line) best = i;
+    }
+    // At the very bottom the last section can be too short to ever cross the
+    // line; make sure the final entry lights up once the page is scrolled out.
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+      best = targets.length - 1;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === best); });
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { sync(); ticking = false; });
+  }, { passive: true });
+  sync();
+})();
+</script>
+</body>
+</html>
